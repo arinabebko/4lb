@@ -49,10 +49,13 @@ namespace Bebko_Autoservice
             //    errors.AppendLine("Укажите скидку");
 
             //string.IsNullOrWhiteSpace(_currentServise.Discount.ToString()))
-            if (_currentServise.Discount<0 || _currentServise.Discount >100 || string.IsNullOrWhiteSpace(_currentServise.Discount.ToString()))
+            //if (_currentServise.Discount < 0 || _currentServise.Discount > 100 || string.IsNullOrWhiteSpace(_currentServise.Discount.ToString()))
+            if (_currentServise.DiscountInt < 0 || _currentServise.DiscountInt > 100 || string.IsNullOrWhiteSpace(_currentServise.DiscountInt.ToString()))
+            {
+               
                 errors.AppendLine("Укажите скидку");
 
-
+            }
 
 
             if (string.IsNullOrWhiteSpace(_currentServise.DurationInSeconds))

@@ -24,7 +24,7 @@ namespace Bebko_Autoservice
         public int ID { get; set; }
         public string Title { get; set; }
         public string MainImagePath { get; set; }
-        public string DurationInSeconds { get; set; }
+        public int DurationInSeconds { get; set; }
         public decimal Cost { get; set; }
         public Nullable<double> Discount { get; set; }
 
@@ -42,6 +42,7 @@ namespace Bebko_Autoservice
                 this.Discount = Convert.ToDouble(value) / 100;
             }
         }
+
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -15,10 +15,13 @@ namespace Bebko_Autoservice
     
     public partial class BebkoAutoServiceEntities : DbContext
     {
+
+
         private static BebkoAutoServiceEntities _context;
         public static BebkoAutoServiceEntities GetContext()
         {
-            if (_context == null) _context = new BebkoAutoServiceEntities();
+            if (_context == null)
+                _context = new BebkoAutoServiceEntities();
             return _context;
         }
 

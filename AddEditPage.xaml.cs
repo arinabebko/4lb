@@ -58,8 +58,19 @@ namespace Bebko_Autoservice
             }
 
 
-            if (string.IsNullOrWhiteSpace(_currentServise.DurationInSeconds))
+
+            if (_currentServise.DurationInSeconds == null || _currentServise.DurationInSeconds <= 0)
+            {
                 errors.AppendLine("Укажите длительность услуги");
+            }
+
+
+            // if (string.IsNullOrWhiteSpace(_currentServise.DurationInSeconds))
+            //    errors.AppendLine("Укажите длительность услуги");
+
+
+            // if (string.IsNullOrWhiteSpace(_currentServise.DurationInSeconds))
+            //    errors.AppendLine("Укажите длительность услуги");
 
 
             if (errors.Length>0)

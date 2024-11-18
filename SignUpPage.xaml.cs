@@ -63,7 +63,7 @@ namespace Bebko_Autoservice
             if (TBStart.Text=="")
                 errors.AppendLine("Укажите время начала уcлуги");
 
-            string pattern = @"^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$";
+            string pattern = @"^(0[0-9]|0|1[0-9]|2[0-3]):([0-5][0-9])$";
             Regex regex = new Regex(pattern);
 
             if (!regex.IsMatch(TBStart.Text))
@@ -108,7 +108,7 @@ namespace Bebko_Autoservice
 
 
 
-            string pattern = @"^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$";
+            string pattern = @"^(0[0-9]|0|1[0-9]|2[0-3]):([0-5][0-9])$";
             Regex regex = new Regex(pattern);
 
           //  if (!regex.IsMatch(TBStart.Text))
@@ -136,7 +136,12 @@ namespace Bebko_Autoservice
                     int sum = startHour + starMin + _currentService.DurationInSeconds;
 
 
+
                     int EndHour = sum / 60;
+                if (EndHour >=  24)
+                {
+                    EndHour = EndHour - 24;
+                }
                     int EndMin = sum % 60;
                     s = EndHour.ToString() + ":" + EndMin.ToString();
                     TBEnd.Text = s;

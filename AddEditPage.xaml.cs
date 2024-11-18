@@ -22,6 +22,7 @@ namespace Bebko_Autoservice
     {
 
         private Service _currentServise = new Service();
+        private int a;
 
         public AddEditPage(Service SelectedService)
         {
@@ -30,7 +31,9 @@ namespace Bebko_Autoservice
             if(SelectedService != null)
             {
                 _currentServise = SelectedService;
+                  a = 1;
             }
+            else { a = 0; }
 
             DataContext = _currentServise;
         }
@@ -67,7 +70,7 @@ namespace Bebko_Autoservice
             {
                 errors.AppendLine("Укажите длительность услуги");
             }
-            if (_currentServise.DurationInSeconds >240)
+            if (_currentServise.DurationInSeconds >240 && a==0) 
             {
                 errors.AppendLine("Длительность не может быть больше 240 минут");
             }
@@ -79,10 +82,15 @@ namespace Bebko_Autoservice
             allServices = allServices.Where(propa => propa.Title == _currentServise.Title).ToList();
 
 
-            if (allServices.Count == 0)
+
+
+          
+
+
+            if (allServices.Count == 0 || a == 1)
             {
-                if (_currentServise.ID == 0)
-                    BebkoAutoServiceEntities.GetContext().Service.Add(_currentServise); 
+                if (_currentServise.ID == 0 )
+                 BebkoAutoServiceEntities.GetContext().Service.Add(_currentServise); 
                     try
                     {
                         BebkoAutoServiceEntities.GetContext().SaveChanges();

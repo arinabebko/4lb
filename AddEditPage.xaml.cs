@@ -53,17 +53,51 @@ namespace Bebko_Autoservice
             if (_currentServise.DiscountInt < 0 || _currentServise.DiscountInt > 100 || string.IsNullOrWhiteSpace(_currentServise.DiscountInt.ToString()))
             {
                
-                errors.AppendLine("Укажите скидку");
+                errors.AppendLine("Укажите скидку от 0 до 100");
 
             }
 
 
 
-            if (_currentServise.DurationInSeconds == null || _currentServise.DurationInSeconds <= 0)
+          //  if (_currentServise.DurationInSeconds == null || _currentServise.DurationInSeconds <= 0)
+           // {
+          //      errors.AppendLine("Укажите длительность услуги");
+          //  }
+            if (_currentServise.DurationInSeconds <= 0)
             {
                 errors.AppendLine("Укажите длительность услуги");
             }
+            if (_currentServise.DurationInSeconds >240)
+            {
+                errors.AppendLine("Длительность не может быть больше 240 минут");
+            }
 
+
+
+
+            var allServices = BebkoAutoServiceEntities.GetContext().Service.ToList();
+            allServices = allServices.Where(propa => propa.Title == _currentServise.Title).ToList();
+
+
+            if (allServices.Count == 0)
+            {
+                if (_currentServise.ID == 0)
+                    BebkoAutoServiceEntities.GetContext().Service.Add(_currentServise); 
+                    try
+                    {
+                        BebkoAutoServiceEntities.GetContext().SaveChanges();
+                        MessageBox.Show("информация сохранена");
+                        Manager.MainFrame.GoBack();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+            }
+            else
+            {
+                MessageBox.Show("уже существует такая услуга");
+            }
 
             // if (string.IsNullOrWhiteSpace(_currentServise.DurationInSeconds))
             //    errors.AppendLine("Укажите длительность услуги");
@@ -79,21 +113,7 @@ namespace Bebko_Autoservice
                 return;
             }
 
-            if (_currentServise.ID ==0)
-            {
-                BebkoAutoServiceEntities.GetContext().Service.Add(_currentServise);
-            }
-
-            try
-            {
-                BebkoAutoServiceEntities.GetContext().SaveChanges();
-                MessageBox.Show("информация сохранена");
-                Manager.MainFrame.GoBack();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
+           
 
 
 
